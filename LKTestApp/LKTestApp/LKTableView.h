@@ -10,6 +10,6 @@
 
 @interface LKTableView : UITableView
 
-+ (LKTableView *)contentTableView;
++ (LKTableView *)contentTableView:(NSInteger)rowNum;
 
 @end

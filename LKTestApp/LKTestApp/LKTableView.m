@@ -10,15 +10,18 @@
 
 @interface LKTableView ()<UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, assign) NSInteger rowNum;
+
 @end
 
 @implementation LKTableView
 
-+ (LKTableView *)contentTableView {
++ (LKTableView *)contentTableView:(NSInteger)rowNum {
     LKTableView *contentTV = [[LKTableView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height) style:UITableViewStylePlain];
     contentTV.backgroundColor = [UIColor clearColor];
     contentTV.dataSource = contentTV;
     contentTV.delegate = contentTV;
+    contentTV.rowNum = rowNum;
     
     return contentTV;
 }
@@ -43,7 +46,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 20;
+    return self.rowNum;
     
 }
 
