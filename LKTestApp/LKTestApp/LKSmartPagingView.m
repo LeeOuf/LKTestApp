@@ -9,9 +9,9 @@
 #import "LKSmartPagingView.h"
 #import "UIView+LKExtension.h"
 
-#define kSmartPagingViewTagSelf             (90000)
-#define kSmartPagingViewTagPageView         (90001)
-#define kSmartPagingViewTagScrollView       (90002)
+#define kSmartPagingViewTagSelf             (89999)
+#define kSmartPagingViewTagPageView         (90000)
+#define kSmartPagingViewTagScrollView       (90001)
 
 @interface LKSmartPagingView () <UIScrollViewDelegate>
 
@@ -135,7 +135,7 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.tag >= kSmartPagingViewTagScrollView)
+    if (scrollView.tag >= kSmartPagingViewTagScrollView && scrollView.tag <= (kSmartPagingViewTagScrollView + self.scrollViews.count))
     {
         CGFloat offsetY = scrollView.contentOffset.y;
         
@@ -178,7 +178,7 @@
             self.pageView.bounces = (scrollView.contentOffset.x <= 0 || scrollView.contentOffset.x >= self.pageView.contentSize.width) ? NO : YES;
         }
         
-        if (self.headerView.superview.tag >= kSmartPagingViewTagScrollView)
+        if (self.headerView.superview.tag >= kSmartPagingViewTagScrollView && self.headerView.superview.tag <= (kSmartPagingViewTagScrollView + self.scrollViews.count))
         {
             [self.headerView removeFromSuperview];
             self.headerView.top = -(self.currentOffset.y + self.headerView.height);
@@ -201,6 +201,23 @@
         self.scrollingViewTag = kSmartPagingViewTagScrollView + [self currentPageIndex];
     }
 }
+
+//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+//{
+//    UITouch *touch = [touches anyObject];
+//    CGPoint location = [touch locationInView:self];
+//    CGPoint childP = [self convertPoint:location toView:self.headerView];
+//    if ([self.headerView pointInside:childP withEvent:event])
+//    {
+//            [self.nextResponder touchesBegan: touches withEvent:event];
+//    }
+//    else
+//    {
+//    
+//        [super touchesBegan: touches withEvent: event];
+//    }
+//}
+
 
 @end
 

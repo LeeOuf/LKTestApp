@@ -44,13 +44,14 @@
     [testView addSubview:btn2];
     
     self.table1 = [LKTableView contentTableView:20];
-    self.table2 = [LKTableView contentTableView:20];
+    self.table2 = [LKTableView contentTableView:2];
     self.table3 = [LKTableView contentTableView:30];
     self.table1.backgroundColor = [UIColor clearColor];
     self.table2.backgroundColor = [UIColor clearColor];
     self.table3.backgroundColor = [UIColor clearColor];
-//    ((UIScrollView *)self.table1).delegate = self;
-//    ((UIScrollView *)self.table2).delegate = self;
+    ((UIScrollView *)self.table1).delegate = self;
+    ((UIScrollView *)self.table2).delegate = self;
+    ((UIScrollView *)self.table3).delegate = self;
     
     NSMutableArray *scrollViews = [[NSMutableArray alloc] init];
     [scrollViews addObject:self.table1];
@@ -63,6 +64,11 @@
 - (void)onClick
 {
 
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
 }
 
 @end
