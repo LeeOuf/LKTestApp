@@ -205,23 +205,6 @@
     }
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    UITouch *touch = [touches anyObject];
-    CGPoint location = [touch locationInView:self];
-    CGPoint childP = [self convertPoint:location toView:self.headerView];
-    if ([self.headerView pointInside:childP withEvent:event])
-    {
-            [self.nextResponder touchesBegan: touches withEvent:event];
-    }
-    else
-    {
-    
-        [super touchesBegan: touches withEvent: event];
-    }
-}
-
-
 @end
 
 @implementation LKSmartPagingViewInfo

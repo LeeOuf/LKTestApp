@@ -22,7 +22,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame withScrollViews:(NSArray *)scrollViews andHeaderView:(UIView *)headerView;
 - (NSInteger)currentPageIndex;
-- (NSInteger)currentPageIndexWithView:(UIScrollView *)scrollView;
 - (UIScrollView *)currentScrollView;
+- (NSInteger)pageIndexWithView:(UIView *)scrollView;
 
 @end
