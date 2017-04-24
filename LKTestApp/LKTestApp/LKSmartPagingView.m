@@ -18,7 +18,6 @@
 @property (nonatomic, strong) UIScrollView *pageView;
 @property (nonatomic, assign) CGPoint currentOffset;
 @property (nonatomic, strong) NSMutableArray<LKSmartPagingViewInfo *> *scrollViewsInfo;     // 记录scrollViews当前滚动位置等信息
-@property (nonatomic, assign) NSInteger scrollingViewTag;
 
 @end
 
@@ -50,7 +49,6 @@
 
 - (void)setupSubviews
 {
-    self.tag = kSmartPagingViewTagSelf;
     self.bouncesEnabled = NO;
     [self setupPageView];
     [self setupScrollViews];
@@ -63,7 +61,6 @@
     self.pageView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.height)];
     self.pageView.contentSize = CGSizeMake(self.pageView.width * self.scrollViews.count, self.pageView.height);
     self.pageView.pagingEnabled = YES;
-    self.pageView.tag = kSmartPagingViewTagPageView;
     self.pageView.delegate = self;
     [self addSubview:self.pageView];
 }
@@ -79,7 +76,6 @@
         UIScrollView *scrollView = [self.scrollViews objectAtIndex:i];
         scrollView.frame = CGRectMake(self.pageView.width * i, 0, self.pageView.width, self.pageView.height);
         scrollView.contentInset = insets;
-        scrollView.tag = kSmartPagingViewTagScrollView + i;
         scrollView.delegate = self;
         [self.pageView addSubview:scrollView];
         
@@ -89,7 +85,6 @@
     }
     
     self.currentOffset = CGPointMake(0, -insets.top);
-    self.scrollingViewTag = kSmartPagingViewTagScrollView;
 }
 
 - (void)setupHeaderView
@@ -105,7 +100,7 @@
 // 获取/记录 scrollView当前的offset
 - (LKSmartPagingViewInfo *)getScrollViewInfo:(UIScrollView *)scrollView
 {
-    return [self.scrollViewsInfo objectAtIndex:[self currentPageIndexWithView:scrollView]];
+    return [self.scrollViewsInfo objectAtIndex:[self pageIndexWithView:scrollView]];
 }
 
 - (void)updateScrollViewInfo:(UIScrollView *)scrollView
@@ -121,33 +116,43 @@
     return (self.pageView.contentOffset.x / self.pageView.width);
 }
 
-- (NSInteger)currentPageIndexWithView:(UIScrollView *)scrollView
-{
-    return (scrollView.tag - kSmartPagingViewTagScrollView);
-}
-
 - (UIScrollView *)currentScrollView
 {
     return [self.scrollViews objectAtIndex:[self currentPageIndex]];
+}
+
+- (NSInteger)pageIndexWithView:(UIView *)scrollView
+{
+    NSInteger index = -1;
+    NSInteger i = 0;
+    for (; i < self.scrollViews.count; i++)
+    {
+        if ([self.scrollViews objectAtIndex:i] == scrollView) {
+            index = i;
+            break;
+        }
+    }
+    
+    return index;
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.tag >= kSmartPagingViewTagScrollView && scrollView.tag <= (kSmartPagingViewTagScrollView + self.scrollViews.count))
+    if ([self pageIndexWithView:scrollView] >= 0)
     {
         CGFloat offsetY = scrollView.contentOffset.y;
         
         // 若是当前主动滑动的scrollView，则开始其他scrollView的联动
-        if (self.scrollingViewTag == scrollView.tag)
+        if ([self currentScrollView] == scrollView)
         {
             self.currentOffset = scrollView.contentOffset;
             [self updateScrollViewInfo:scrollView];
             
             for(UIScrollView *tempView in self.scrollViews)
             {
-                if (tempView.tag != scrollView.tag)
+                if (tempView != scrollView)
                 {
                     if (offsetY <= 0)                                           // header仍在界面中时
                     {
@@ -170,7 +175,7 @@
         }
     }
     
-    if (scrollView.tag == kSmartPagingViewTagPageView)
+    if (scrollView == self.pageView)
     {
         // 禁止滑出左右边界
         if (!self.bouncesEnabled)
@@ -178,7 +183,7 @@
             self.pageView.bounces = (scrollView.contentOffset.x <= 0 || scrollView.contentOffset.x >= self.pageView.contentSize.width) ? NO : YES;
         }
         
-        if (self.headerView.superview.tag >= kSmartPagingViewTagScrollView && self.headerView.superview.tag <= (kSmartPagingViewTagScrollView + self.scrollViews.count))
+        if ([self pageIndexWithView:self.headerView.superview] >= 0)
         {
             [self.headerView removeFromSuperview];
             self.headerView.top = -(self.currentOffset.y + self.headerView.height);
@@ -189,34 +194,32 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (scrollView.tag == kSmartPagingViewTagPageView)
+    if (scrollView == self.pageView)
     {
-        if (self.headerView.superview.tag == kSmartPagingViewTagSelf)
+        if (self.headerView.superview == self)
         {
             [self.headerView removeFromSuperview];
             self.headerView.top = -self.headerView.height;
             [[self currentScrollView] addSubview:self.headerView];
         }
-        
-        self.scrollingViewTag = kSmartPagingViewTagScrollView + [self currentPageIndex];
     }
 }
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    UITouch *touch = [touches anyObject];
-//    CGPoint location = [touch locationInView:self];
-//    CGPoint childP = [self convertPoint:location toView:self.headerView];
-//    if ([self.headerView pointInside:childP withEvent:event])
-//    {
-//            [self.nextResponder touchesBegan: touches withEvent:event];
-//    }
-//    else
-//    {
-//    
-//        [super touchesBegan: touches withEvent: event];
-//    }
-//}
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [touch locationInView:self];
+    CGPoint childP = [self convertPoint:location toView:self.headerView];
+    if ([self.headerView pointInside:childP withEvent:event])
+    {
+            [self.nextResponder touchesBegan: touches withEvent:event];
+    }
+    else
+    {
+    
+        [super touchesBegan: touches withEvent: event];
+    }
+}
 
 
 @end
