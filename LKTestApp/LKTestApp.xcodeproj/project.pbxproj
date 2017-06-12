@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD2932991EC9801300679906 /* PushedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2932981EC9801300679906 /* PushedViewController.m */; };
 		BD4BD6E01EACED65004F3993 /* LKSmartPagingView.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BD6DF1EACED65004F3993 /* LKSmartPagingView.m */; };
 		BD6FFED11EAB175300D568A8 /* UIView+LKExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6FFED01EAB175300D568A8 /* UIView+LKExtension.m */; };
 		BD8BCCE81D953E9600682AA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BCCE71D953E9600682AA4 /* main.m */; };
@@ -18,6 +19,7 @@
 		BD8BCD011D953E9600682AA4 /* LKTestAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BCD001D953E9600682AA4 /* LKTestAppTests.m */; };
 		BD8BCD0C1D953E9600682AA4 /* LKTestAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BD8BCD0B1D953E9600682AA4 /* LKTestAppUITests.m */; };
 		BDCE6E7C1EA4D4A100745458 /* LKTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BDCE6E7B1EA4D4A100745458 /* LKTableView.m */; };
+		BDE961D51EEE7BE300FD92D1 /* NSArray+LKExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BDE961D41EEE7BE300FD92D1 /* NSArray+LKExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD2932971EC9801300679906 /* PushedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushedViewController.h; sourceTree = "<group>"; };
+		BD2932981EC9801300679906 /* PushedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushedViewController.m; sourceTree = "<group>"; };
 		BD4BD6DE1EACED65004F3993 /* LKSmartPagingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKSmartPagingView.h; sourceTree = "<group>"; };
 		BD4BD6DF1EACED65004F3993 /* LKSmartPagingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKSmartPagingView.m; sourceTree = "<group>"; };
 		BD6FFECF1EAB175300D568A8 /* UIView+LKExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LKExtension.h"; sourceTree = "<group>"; };
@@ -61,6 +65,8 @@
 		BDC15C641DE68EF900625693 /* LKTestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LKTestApp.entitlements; sourceTree = "<group>"; };
 		BDCE6E7A1EA4D4A100745458 /* LKTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LKTableView.h; sourceTree = "<group>"; };
 		BDCE6E7B1EA4D4A100745458 /* LKTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LKTableView.m; sourceTree = "<group>"; };
+		BDE961D31EEE7BE300FD92D1 /* NSArray+LKExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LKExtension.h"; sourceTree = "<group>"; };
+		BDE961D41EEE7BE300FD92D1 /* NSArray+LKExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LKExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,10 +120,14 @@
 				BDC15C641DE68EF900625693 /* LKTestApp.entitlements */,
 				BD8BCCEC1D953E9600682AA4 /* ViewController.h */,
 				BD8BCCED1D953E9600682AA4 /* ViewController.m */,
+				BD2932971EC9801300679906 /* PushedViewController.h */,
+				BD2932981EC9801300679906 /* PushedViewController.m */,
 				BD4BD6DE1EACED65004F3993 /* LKSmartPagingView.h */,
 				BD4BD6DF1EACED65004F3993 /* LKSmartPagingView.m */,
 				BD6FFECF1EAB175300D568A8 /* UIView+LKExtension.h */,
 				BD6FFED01EAB175300D568A8 /* UIView+LKExtension.m */,
+				BDE961D31EEE7BE300FD92D1 /* NSArray+LKExtension.h */,
+				BDE961D41EEE7BE300FD92D1 /* NSArray+LKExtension.m */,
 				BDCE6E7A1EA4D4A100745458 /* LKTableView.h */,
 				BDCE6E7B1EA4D4A100745458 /* LKTableView.m */,
 				BD8BCCEF1D953E9600682AA4 /* Main.storyboard */,
@@ -299,9 +309,11 @@
 				BD8BCCEE1D953E9600682AA4 /* ViewController.m in Sources */,
 				BDCE6E7C1EA4D4A100745458 /* LKTableView.m in Sources */,
 				BD6FFED11EAB175300D568A8 /* UIView+LKExtension.m in Sources */,
+				BD2932991EC9801300679906 /* PushedViewController.m in Sources */,
 				BD4BD6E01EACED65004F3993 /* LKSmartPagingView.m in Sources */,
 				BD8BCCEB1D953E9600682AA4 /* AppDelegate.m in Sources */,
 				BD8BCCE81D953E9600682AA4 /* main.m in Sources */,
+				BDE961D51EEE7BE300FD92D1 /* NSArray+LKExtension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

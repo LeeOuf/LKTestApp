@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UIView+LKExtension.h"
 
-@interface ViewController : UIViewController<UIScrollViewDelegate>
+@interface ViewController : UIViewController
 
 @end
 
