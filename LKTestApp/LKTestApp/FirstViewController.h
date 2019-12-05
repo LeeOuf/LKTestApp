@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  FirstViewController.h
 //  LKTestApp
 //
 //  Created by 李可 on 2019/12/5.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface FirstViewController : UIViewController
 
 
 @end

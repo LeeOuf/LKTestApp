@@ -2,15 +2,18 @@
 //  main.m
 //  LKTestApp
 //
-//  Created by Li,Ke(BBTD) on 16/9/23.
-//  Copyright © 2016年 Li,Ke(BBTD). All rights reserved.
+//  Created by 李可 on 2019/12/5.
+//  Copyright © 2019 李可. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
 int main(int argc, char * argv[]) {
+    NSString * appDelegateClassName;
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+        // Setup code that might create autoreleased objects goes here.
+        appDelegateClassName = NSStringFromClass([AppDelegate class]);
     }
+    return UIApplicationMain(argc, argv, nil, appDelegateClassName);
 }
